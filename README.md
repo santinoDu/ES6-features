@@ -171,4 +171,4 @@ function f (x, y, z) {
 f(1) === 50;
 ```
 
-`to be continued`
+`to be continued... go to[ES6-features](http://es6-features.org/)`
