@@ -410,6 +410,113 @@ obj = {
 };
 ```
 
+###Destructuring Assignment
+####Array Matching
+#####ECMAScript 6
+``` js
+var list = [ 1, 2, 3 ]
+var [ a, , b ] = list
+[ b, a ] = [ a, b ]
+```
+
+#####ECMAScript 5
+``` js
+var list = [ 1, 2, 3 ];
+var a = list[0], b = list[2];
+var tmp = a; a = b; b = tmp;
+```
+
+####Object Matching, Shorthand Notation
+#####ECMAScript 6
+``` js
+var { op, lhs, rhs } = getASTNode()
+```
+
+#####ECMAScript 5
+``` js
+var tmp = getASTNode();
+var op  = tmp.op;
+var lhs = tmp.lhs;
+var rhs = tmp.rhs;
+```
+
+####Object Matching, Deep Matching
+#####ECMAScript 6
+``` js
+var { op: a, lhs: { op: b }, rhs: c } = getASTNode()
+```
+
+#####ECMAScript 5
+``` js
+var tmp = getASTNode();
+var a = tmp.op;
+var b = tmp.lhs.op;
+var c = tmp.rhs;
+```
+
+####Parameter Context Matching
+#####ECMAScript 6
+``` js
+function f ([ name, val ]) {
+    console.log(name, val)
+}
+function g ({ name: n, val: v }) {
+    console.log(n, v)
+}
+function h ({ name, val }) {
+    console.log(name, val)
+}
+f([ "bar", 42 ])
+g({ name: "foo", val:  7 })
+h({ name: "bar", val: 42 })
+```
+
+#####ECMAScript 5
+``` js
+function f (arg) {
+    var name = arg[0];
+    var val  = arg[1];
+    console.log(name, val);
+};
+function g (arg) {
+    var n = arg.name;
+    var v = arg.val;
+    console.log(n, v);
+};
+function h (arg) {
+    var name = arg.name;
+    var val  = arg.val;
+    console.log(name, val);
+};
+f([ "bar", 42 ]);
+g({ name: "foo", val:  7 });
+h({ name: "bar", val: 42 });
+```
+
+####Fail-Soft Destructuring
+#####ECMAScript 6
+``` js
+var list = [ 7, 42 ]
+var [ a = 1, b = 2, c = 3, d ] = list
+a === 7
+b === 42
+c === 3
+d === undefined
+```
+
+#####ECMAScript 5
+``` js
+var list = [ 7, 42 ];
+var a = typeof list[0] !== "undefined" ? list[0] : 1;
+var b = typeof list[1] !== "undefined" ? list[1] : 2;
+var c = typeof list[2] !== "undefined" ? list[2] : 3;
+var d = typeof list[3] !== "undefined" ? list[3] : undefined;
+a === 7;
+b === 42;
+c === 3;
+d === undefined;
+```
+
 
 
 `to be continued...` go to [ES6-features](http://es6-features.org/)
