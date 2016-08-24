@@ -64,3 +64,111 @@ callbacks[0]() === 0;
 callbacks[1]() === 2;
 callbacks[2]() === 4;
 ```
+
+####Block-Scoped Functions
+#####ECMAScript 6
+``` js
+{
+    function foo () { return 1 }
+    foo() === 1
+    {
+        function foo () { return 2 }
+        foo() === 2
+    }
+    foo() === 1
+}
+```
+
+#####ECMAScript 5
+``` js
+(function () {
+    var foo = function () { return 1; }
+    foo() === 1;
+    (function () {
+        var foo = function () { return 2; }
+        foo() === 2;
+    })();
+    foo() === 1;
+})();
+```
+
+###Arrow Functions
+####Expression Bodies
+#####ECMAScript 6
+``` js
+odds  = evens.map(v => v + 1)
+pairs = evens.map(v => ({ even: v, odd: v + 1 }))
+nums  = evens.map((v, i) => v + i)
+```
+
+#####ECMAScript 5
+``` js
+odds  = evens.map(function (v) { return v + 1; });
+pairs = evens.map(function (v) { return { even: v, odd: v + 1 }; });
+nums  = evens.map(function (v, i) { return v + i; });
+```
+
+####Statement Bodies
+#####ECMAScript 6
+``` js
+nums.forEach(v => {
+   if (v % 5 === 0)
+       fives.push(v)
+})
+```
+
+#####ECMAScript 5
+``` js
+nums.forEach(function (v) {
+   if (v % 5 === 0)
+       fives.push(v);
+});
+```
+
+####Lexical this
+#####ECMAScript 6
+``` js
+this.nums.forEach((v) => {
+    if (v % 5 === 0)
+        this.fives.push(v)
+})
+```
+
+#####ECMAScript 5
+``` js
+var self = this;
+this.nums.forEach(function (v) {
+    if (v % 5 === 0)
+        self.fives.push(v);
+});
+
+//  or
+this.nums.forEach(function (v) {
+    if (v % 5 === 0)
+        this.fives.push(v);
+}.bind(this));
+```
+
+###Extended Parameter Handling
+####Default Parameter Values
+#####ECMAScript 6
+``` js
+function f (x, y = 7, z = 42) {
+    return x + y + z
+}
+f(1) === 50
+```
+
+#####ECMAScript 5
+``` js
+function f (x, y, z) {
+    if (y === undefined)
+        y = 7;
+    if (z === undefined)
+        z = 42;
+    return x + y + z;
+};
+f(1) === 50;
+```
+
+`to be continued`
